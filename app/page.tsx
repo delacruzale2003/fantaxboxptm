@@ -59,7 +59,7 @@ export default function Home() {
           >
             {/* Reemplaza "/fantaxbox-logo.png" por tu logo real en la carpeta public */}
             <Image
-              src="/fantaicon.svg" // Usando el icono que ya tienes como fallback
+              src="/logofantaxbox.png" // Usando el icono que ya tienes como fallback
               alt="Fanta x Xbox Logo"
               fill
               className="object-contain drop-shadow-2xl"
