@@ -4,30 +4,31 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-// Colores oficiales exactos y URLs para SEO
+// Colores oficiales exactos y URLs para SEO (Sin sombras)
 const stores = [
   { 
     name: "Tambo", 
+    // Usamos el dominio exacto que la gente busca
+    domain: "promofantaxbox-tambo.ptm.pe",
     url: "https://promofantaxbox-tambo.ptm.pe",
     logoPath: "/logotambo.png", 
     color: "bg-[#942180]", 
-    
     delay: 0.2
   },
   { 
     name: "Oxxo", 
+    domain: "promofantaxbox-oxxo.ptm.pe",
     url: "https://promofantaxbox-oxxo.ptm.pe",
     logoPath: "/logoOXXO.png", 
     color: "bg-[#e42320]", 
-    
     delay: 0.4
   },
   { 
     name: "Listo", 
+    domain: "fantaxbox-listo.ptm.pe",
     url: "https://fantaxbox-listo.ptm.pe",
     logoPath: "/logoLISTO.png", 
     color: "bg-[#ff5100]", 
-    
     delay: 0.6
   }
 ];
@@ -104,13 +105,10 @@ export default function Home() {
                 delay: store.delay 
               }}
             >
-              {/* Usamos Link para buen SEO. Toda el área es clickable.
-                Aplicamos el color específico de la tienda al fondo.
-              */}
               <Link 
                 href={store.url}
                 title={`Ingresar a la promoción de Fanta Xbox en ${store.name}`}
-                className={`group flex items-center justify-center w-full h-[90px] sm:h-[100px] rounded-3xl ${store.color} shadow-xl ${store.shadowColor} relative overflow-hidden transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98] border border-white/10`}
+                className={`group flex items-center justify-center w-full h-[90px] sm:h-[100px] rounded-3xl ${store.color} relative overflow-hidden transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98] border border-white/10`}
               >
                 
                 {/* Contenedor del Logo centrado */}
@@ -119,16 +117,26 @@ export default function Home() {
                     src={store.logoPath}
                     alt={`Promoción Fanta Xbox en ${store.name}`}
                     fill
-                    className="object-contain drop-shadow-md" 
+                    className="object-contain" 
                   />
                 </div>
                 
-                {/* Texto invisible para lectores de pantalla y bots de Google */}
-                <span className="sr-only">Registrar voucher de {store.name}</span>
+                {/* TRUCO SEO: Texto visible para los bots, pero diminuto y mimetizado para los humanos */}
+                <span className="absolute bottom-1 left-0 w-full text-center text-[10px] text-white/40 font-medium z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                  {store.domain}
+                </span>
+
               </Link>
             </motion.div>
           ))}
         </nav>
+
+        {/* TRUCO SEO 2: Texto en el footer para anclar las búsquedas */}
+        <div className="mt-12 text-center w-full px-4">
+           <p className="text-[10px] text-white/30 font-medium">
+             Links directos: promofantaxbox-tambo.ptm.pe | promofantaxbox-oxxo.ptm.pe | fantaxbox-listo.ptm.pe
+           </p>
+        </div>
 
       </div>
     </main>
